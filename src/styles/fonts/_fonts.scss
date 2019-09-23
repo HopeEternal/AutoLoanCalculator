@@ -1,0 +1,14 @@
+/* @import must be at top of file, otherwise CSS will not work */
+$glober-font-path: '/assets/fonts/webfonts' !default;
+
+@font-face {
+    font-family: 'Glober';
+    src: url('#{$glober-font-path}/glober-regular.eot');
+    src: url('#{$glober-font-path}/glober-regular.eot?#iefix') format('embedded-opentype'),
+         url('#{$glober-font-path}/glober-regular.woff2') format('woff2'),
+         url('#{$glober-font-path}/glober-regular.woff') format('woff'),
+         url('#{$glober-font-path}/glober-regular.ttf') format('truetype'),
+         url('#{$glober-font-path}/glober-regular.svg#glober_regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
