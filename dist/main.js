@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"* {\\n  margin: 0;\\n  padding: 0;\\n  font-size: 100%;\\n  line-height: 1;\\n}\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/styles/main.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3");
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Imports\nexports.push([module.i, \"@import url(https://fonts.googleapis.com/css?family=Fjalla+One|Noto+Sans&display=swap);\", \"\"]);\n// Module\nexports.push([module.i, \"* {\\n  margin: 0;\\n  padding: 0;\\n  line-height: 1;\\n}\\n\\n:root {\\n  font-size: 100%;\\n}\\n\\nbody {\\n  font-size: 1rem;\\n  font-family: \\\"Noto Sans\\\", sans-serif;\\n}\\n\\nh1, h2, h3, h4, h5, h6 {\\n  font-family: \\\"Fjalla One\\\", sans-serif;\\n}\\n\\nh1 {\\n  font-size: 6rem;\\n}\\n\\nheader {\\n  background-color: red;\\n}\\n\\n.calculations {\\n  background-color: blue;\\n}\\n\\n.userInput {\\n  background-color: purple;\\n}\\n\\nfooter {\\n  background-color: green;\\n}\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/styles/main.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3");
 
 /***/ }),
 

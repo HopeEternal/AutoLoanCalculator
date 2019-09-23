@@ -1,13 +1,54 @@
 //* Settings *//
+    // Imports
+    // -------------------------
+    @import url('https://fonts.googleapis.com/css?family=Fjalla+One|Noto+Sans&display=swap');
+
+    // Colors
+    // -------------------------
+    $gray-lightest:          #efefef;
+    $almost-white:           #f7f7f7;
+    $white:                  #ffffff;
+
+    // Typography
+    // -------------------------
+    
+    $font-family-header:  'Fjalla One', sans-serif;
+    $font-family-body: 'Noto Sans', sans-serif;
+
 
 //* Base Styles *//
-* { 
-    margin: 0; 
-    padding: 0; 
-    font-size:100%; 
-    line-height:1; 
-}
+    * { 
+        margin: 0; 
+        padding: 0; 
+        line-height:1; 
+    }
+    :root {
+        font-size: 100%
+      }
+      
+    body {
+        font-size: 1rem;
+        font-family: $font-family-body;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: $font-family-header;
+    }
+    h1 {
+        font-size: 6rem; 
+    }
 
 //* Page Styles *//
-
+    header {
+        background-color: red;
+    }
+    .calculations {
+        background-color: blue;
+    }
+    .userInput {
+        background-color: purple;
+    }
+    footer {
+        background-color: green;
+    }
 //* Animations *//
