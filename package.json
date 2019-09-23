@@ -1,7 +1,7 @@
 {
   "name": "autoloancalc",
   "version": "1.0.0",
-  "description": "\u0016A calculator that helps you identify monthly payments, interest and amortization for an auto loan.",
+  "description": "A calculator that helps you identify monthly payments, interest and amortization for an auto loan.",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "\u0016\u0016https://github.com/HopeEternal/AutoLoanCalculator.git"
+    "url": "https://github.com/HopeEternal/AutoLoanCalculator.git"
   },
   "author": "Risa Hall",
   "license": "ISC",
