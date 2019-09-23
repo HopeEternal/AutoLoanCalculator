@@ -8,4 +8,4 @@ A calculator that helps you identify monthly payments, interest and amortization
 * HTML5
 
 # Live Preview
-Check out the live version of this app at https://hopeeternal.github.io/AutoLoanCalculator/src/index.
+Check out the live version of this app at https://hopeeternal.github.io/AutoLoanCalculator/dist/index.html
