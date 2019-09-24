@@ -68,8 +68,25 @@
            const interestOutput = document.getElementById("interestOutput");
 
            //Calculate
-           monthlyOutput.value = carPrice;
-           interestOutput.value = downPayment;
+           /* Monthly Payment Formula:
+                monthlyPayment = downPayment 
+                * 
+                (interest per month (1 + interest per month) * months 
+                / 
+                (1 + interest per month) ^ months - 1
+           */
+
+           //Convert years to months to perform all future calculations based on months
+            let loanDuration = parseFloat((loanYears * 12) + loanMonths);
+            
+            //Get Interest per month - multiply apr by car price and divide by 12
+            let intRatePerMonth = (interestRate / 100) / 12;
+            let equationTop = Math.pow(intRatePerMonth * (1 + intRatePerMonth), loanDuration);
+            let equationBot = Math.pow(1 + intRatePerMonth, loanDuration - 1);
+            console.log(equationTop + " is equation top and bottom is " + equationBot);
+
+           monthlyOutput.value = loanDuration;
+           interestOutput.value = intRatePerMonth;
 
         }
     </script>
