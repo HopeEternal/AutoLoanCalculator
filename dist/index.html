@@ -12,42 +12,43 @@
         <header class="pageHeader">
             <h1>Auto Loan Calculator</h1>
         </header>
-        <main class="pageMain">
-            <section class="userInput">
-                <form class="userInputForm" id="inputForm" oninput="updateOutput()">
-                    <p><label>Car Price:
-                        <span class="dollarSign">$</span><input name="carPrice" id="carPrice" type="number" value="0.00" onchange="updateOutput()" />
-                    </label></p>
-                    <p><label>Downpayment:
-                        <span class="dollarSign">$</span><input name="downPayment" id="downPayment" type="number" value="0.00" onchange="updateOutput()" />
-                    </label></p>
-                    <p><label class="loanDuration">Loan Duration:
-                        <span class="yearsLabel">years</span><input name="years" id="years" type="number" value="12" onchange="updateOutput()" />
-                        <span class="monthsLabel">months</span><input name="months" id="months" type="number" value="6" onchange="updateOutput()" />
-                    </label></p>
-                    <p><label>Interest Rate:
-                            <input name="interestRate" id="interestRate" type="number" value="3" onchange="updateOutput()" /><span class="percentSign">%</span>
+        <main>
+            <div class="pageMain">
+                <section class="userInput">
+                    <form class="userInputForm" id="inputForm" oninput="updateOutput()">
+                        <p><label>Car Price:
+                            <span class="dollarSign">$</span><input name="carPrice" id="carPrice" type="number" value="0.00" onchange="updateOutput()" />
                         </label></p>
-                </form>
+                        <p><label>Downpayment:
+                            <span class="dollarSign">$</span><input name="downPayment" id="downPayment" type="number" value="0.00" onchange="updateOutput()" />
+                        </label></p>
+                        <p><label class="loanDuration">Loan Duration:
+                            <span class="yearsLabel">years</span><input name="years" id="years" type="number" value="2" onchange="updateOutput()" />
+                            <span class="monthsLabel">months</span><input name="months" id="months" type="number" value="6" onchange="updateOutput()" />
+                        </label></p>
+                        <p><label>Interest Rate:
+                                <input name="interestRate" id="interestRate" type="number" value="3" onchange="updateOutput()" /><span class="percentSign">%</span>
+                            </label></p>
+                    </form>
 
-            </section>
-            <section class="calculations">
-                <section class="loanAmounts">
-                    <h2>Monthly Payment</h2>
-                    <h3 class="outputNums" id="monthlyPayment">
-                        <output name="MonthlyPayment" id="monthlyOutput" for="carPrice downPayment years months interestRate" form="inputForm">0</output>
-                    </h3>
+                </section>
+                <section class="calculations">
+                    <section class="loanAmounts">
+                        <h2>Monthly Payment</h2>
+                        <h3 class="outputNums" id="monthlyPayment">
+                            <output name="MonthlyPayment" id="monthlyOutput" for="carPrice downPayment years months interestRate" form="inputForm">0</output>
+                        </h3>
 
-                    <h2>Total Interest Paid</h2>
-                    <h3 class="outputNums" id="totalInterestPaid">
-                        <output name="totalInterest" id="interestOutput" for="carPrice downPayment years months interestRate" form="inputForm">0</output>
-                    </h3>
-                    <button id="btnCalculate">Get Amortization Schedule!</button>
+                        <h2>Total Interest Paid</h2>
+                        <h3 class="outputNums" id="totalInterestPaid">
+                            <output name="totalInterest" id="interestOutput" for="carPrice downPayment years months interestRate" form="inputForm">0</output>
+                        </h3>
+                        <button id="btnCalculate">Get Amortization Schedule!</button>
+                    </section>
                 </section>
-                <section class="amortization">
-                          
-                </section>
-                
+            </div>
+            <section class="amortization">
+                <p>View your amortization schedule here!</p>              
             </section>
         </main>
         <footer class="pageFooter">
@@ -69,7 +70,7 @@
 
            //Calculate
            /* Monthly Payment Formula:
-                monthlyPayment = downPayment 
+                monthlyPayment = carPrice - downPayment 
                 * 
                 (interest per month (1 + interest per month) * months 
                 / 
@@ -77,15 +78,12 @@
            */
 
            //Convert years to months to perform all future calculations based on months
-            let loanDuration = parseFloat((loanYears * 12) + loanMonths);
-            
-            //Get Interest per month - multiply apr by car price and divide by 12
+            let loanDuration = parseFloat((loanYears * 12) + loanMonths);           
             let intRatePerMonth = (interestRate / 100) / 12;
-            let equationTop = Math.pow(intRatePerMonth * (1 + intRatePerMonth), loanDuration);
-            let equationBot = Math.pow(1 + intRatePerMonth, loanDuration - 1);
-            console.log(equationTop + " is equation top and bottom is " + equationBot);
+            let monthlyPayment = ((intRatePerMonth + (intRatePerMonth / (Math.pow((1 + intRatePerMonth), loanDuration) -1))) * (carPrice - (downPayment || 0))).toFixed(2);
 
-           monthlyOutput.value = loanDuration;
+            
+           monthlyOutput.value = monthlyPayment;
            interestOutput.value = intRatePerMonth;
 
         }

@@ -58,79 +58,89 @@
         background-size: 90% auto;   
     }
       
-    .pageMain {
-        flex-grow: 1;
-        .userInput, .calculations {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-        .calculations {
-            background-color: $grayTransBox;
-            margin: 1rem 6rem;
-            
-            h2, h3 {
-                line-height: 5rem;
-                text-align: center;
-            }
-            h3 {
-                color: $salmon;
-                font-size: 5rem;
-            }
-            button {
-                font-family: $font-family-body;
-                font-size: 1.5rem;
-                padding: 1rem;
-                border-radius: 0.5em;
-                background: $purple;
-                color: $white;
-                border: none;
-                right: 0px;
-                margin: .75rem auto;
-                width: 100%;
-            }
-        }
-        .userInput {
-              .userInputForm{
-                padding: 2rem;
-                border: 5px solid $grayTransBox;
-                
-                label {
-                    display:block;
-                    margin-bottom: 10px;
-                    padding: 0;
-                    font-size: 1.5rem;
-                }
-                input, select, textarea {
-                    font-size: 1.5rem;
-                    color: $gray;
-                    margin-top: .75rem;
-                    padding:.5rem;
-                    border: none;
-                    background-color: $grayTransBox;
-                }
-                .percentSign, .dollarSign, .monthsLabel, .yearsLabel {
-                    font-size: 1.25rem;
-                    color: $lightblue;
-                    margin: auto .5rem;
-                }
-                
-                button:hover {
-                    background: #ccc;
-                    cursor: pointer;
-                }
-                .loanDuration input {
-                    width: 4rem;
+    main {
 
+        .pageMain {
+            flex-grow: 1;
+            .userInput, .calculations {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+            }
+            .calculations {
+                background-color: $grayTransBox;
+                margin: 1rem 6rem;
+                
+                h2, h3 {
+                    line-height: 5rem;
+                    text-align: center;
                 }
-                #interestRate {
-                    width: 5rem;
+                h3 {
+                    color: $salmon;
+                    font-size: 5rem;
                 }
-        
-            }      
+                button {
+                    font-family: $font-family-body;
+                    font-size: 1.5rem;
+                    padding: 1rem;
+                    border-radius: 0.5em;
+                    background: $purple;
+                    color: $white;
+                    border: none;
+                    right: 0px;
+                    margin: .75rem auto;
+                    width: 100%;
+                }
+            }
+            .userInput {
+                .userInputForm{
+                    padding: 2rem;
+                    border: 5px solid $grayTransBox;
+                    
+                    label {
+                        display:block;
+                        margin-bottom: 10px;
+                        padding: 0;
+                        font-size: 1.5rem;
+                    }
+                    input, select, textarea {
+                        font-size: 1.5rem;
+                        color: $gray;
+                        margin-top: .75rem;
+                        padding:.5rem;
+                        border: none;
+                        background-color: $grayTransBox;
+                    }
+                    .percentSign, .dollarSign, .monthsLabel, .yearsLabel {
+                        font-size: 1.25rem;
+                        color: $lightblue;
+                        margin: auto .5rem;
+                    }
+                    
+                    button:hover {
+                        background: #ccc;
+                        cursor: pointer;
+                    }
+                    .loanDuration input {
+                        width: 4rem;
+
+                    }
+                    #interestRate {
+                        width: 5rem;
+                    }
+            
+                }      
+            }
+            
+        }
+    
+        .amortization{
+            padding: 3rem;
+            flex: 1;
         }
     }
-
+    
+    
     @media(min-width: 1000px){
         .pageHeader, .pageMain, .pageFooter {
             display: flex;
