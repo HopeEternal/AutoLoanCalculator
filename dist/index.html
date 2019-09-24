@@ -8,29 +8,48 @@
     <title>Auto Loan Calculator</title>
 </head>
 <body>
-    <header>
-        <h1>Auto Loan Calculator</h1>
-    </header>
-    <main>
-        <section class="userInput">
-            <p>Form Placeholder</p>
-            
-        </section>
-        <section class="calculations">
-            <section class="loanAmounts">
-                <h2>Monthly Payment</h2>
-                <h3 id="monthlyPayment">XX.XX</h3>
-                <h2>Total Interest Paid</h2>
-                <h3 id="totalInterestPaid">XX.XX</h3>
+    <div class="wrapper">
+        <header class="pageHeader">
+            <h1>Auto Loan Calculator</h1>
+        </header>
+        <main class="pageMain">
+            <section class="userInput">
+                <form class="userInputForm">
+                    <p><label>Car Price
+                        <input name="carPrice" id="carPrice" type="number" value="0.00" />
+                    </label></p>
+                    <p><label>Downpayment
+                        <input name="downPayment" id="downPayment" type="number" value="0.00" />
+                    </label></p>
+                    <p><label class="loanDuration">Loan Duration
+                            <input name="years" id="years" type="number" value="12" />
+                            <input name="months" id="months" type="number" value="6" />
+                    </label></p>
+                    <p><label>Interest Rate
+                            <input name="interestRate" id="interestRate" type="number" value="3" />
+                        </label></p>
+                    <p><button id="btnCalculate">Calculate</button></p>
+
+                </form>
+                
             </section>
-            <section class="amortization">
+            <section class="calculations">
+                <section class="loanAmounts">
+                    <h2>Monthly Payment</h2>
+                    <h3 class="outputNums" id="monthlyPayment">XX.XX</h3>
+                    <h2>Total Interest Paid</h2>
+                    <h3 class="outputNums" id="totalInterestPaid">XX.XX</h3>
+                </section>
+                <section class="amortization">
+                    
+                </section>
+                
             </section>
-            
-        </section>
-    </main>
-    <footer>
-        <p>© 2019 by Risa Hall Web Design, Inc. All Rights Reserved.</p>
-    </footer>
+        </main>
+        <footer class="pageFooter">
+            <p>© 2019 by Risa Hall Web Design, Inc. All Rights Reserved. Car Driving Vector by <a href="https://www.vecteezy.com/free-vector/car-driving">Vecteezy</a>.</p>
+        </footer>
+    </div>
 
 <script type="text/javascript" src="main.js"></script><script type="text/javascript" src="main.js"></script></body>
 </html>

@@ -5,10 +5,16 @@
 
     // Colors
     // -------------------------
-    $gray-lightest:          #efefef;
-    $almost-white:           #f7f7f7;
-    $white:                  #ffffff;
-
+    $white:#ffffff;
+    $darkgray: #383d43;
+    $lightblue: #75CFE7;
+    $blue: #2e92cd;
+    $darkblue: #1F6187;
+    $grayblue: #626796;
+    $purple: #8864AA;
+    $gray: #99AABB;
+    $salmon: #FACE93;
+    $grayTransBox: rgba(56, 61, 67, .4);
     // Typography
     // -------------------------
     
@@ -21,14 +27,16 @@
         margin: 0; 
         padding: 0; 
         line-height:1; 
+        box-sizing: border-box;
     }
     :root {
         font-size: 100%
       }
       
     body {
-        font-size: 1rem;
+        font-size: 2rem;
         font-family: $font-family-body;
+        color: $white;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -39,16 +47,98 @@
     }
 
 //* Page Styles *//
-    header {
-        background-color: red;
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-image: url("/assets/img/ford_background.png");
+        background-repeat: no-repeat, no-repeat;
+        background-color: $darkblue;
+        background-position: right bottom;
+        background-size: 90% auto;   
     }
-    .calculations {
-        background-color: blue;
+      
+    .pageMain {
+        flex-grow: 1;
+        .userInput, .calculations {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .calculations {
+            background-color: $grayTransBox;
+            margin: 1rem 6rem;
+            
+            h2, h3 {
+                line-height: 5rem;
+                text-align: center;
+            }
+            h3 {
+                color: $salmon;
+                font-size: 5rem;
+          }
+        }
+        .userInput {
+              .userInputForm{
+                padding: 2rem;
+                border: 5px solid $grayTransBox;
+                
+                label {
+                    display:block;
+                    margin-bottom: 10px;
+                    padding: 0;
+                    font-size: 1.5rem;
+                }
+                input, select, textarea {
+                    font-size: 1.5rem;
+                    color: $gray;
+                    margin: auto .5rem;
+                    padding:.5rem;
+                    border: none;
+                    background-color: $grayTransBox;
+                }
+                button {
+                    font-family: $font-family-body;
+                    font-size: 1.5rem;
+                    padding: 1rem;
+                    border-radius: 0.5em;
+                    background: $purple;
+                    color: $white;
+                    border: none;
+                    right: 0px;
+                    margin: .5rem auto;
+                    width: 100%;
+                }
+                button:hover {
+                    background: #ccc;
+                    cursor: pointer;
+                }
+                .loanDuration input {
+                    width: 4rem;
+
+                }
+        
+            }      
+        }
     }
-    .userInput {
-        background-color: purple;
+
+    @media(min-width: 1000px){
+        .pageHeader, .pageMain, .pageFooter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
-    footer {
-        background-color: green;
+    .pageHeader, .pageMain .calculations, .pageMain .userInput, .pageFooter {
+        padding: 2rem;
+    }
+
+    
+    .pageFooter {
+      font-size: 1rem;
+      color: $white;
+      p {
+        margin-bottom: -1rem;
+      }
     }
 //* Animations *//
