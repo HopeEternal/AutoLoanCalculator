@@ -16,7 +16,8 @@
   "author": "Risa Hall",
   "license": "ISC",
   "dependencies": {
-    "node-sass-import": "^2.0.1"
+    "node-sass-import": "^2.0.1",
+    "postcss-loader": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

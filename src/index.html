@@ -72,7 +72,7 @@
            /* Monthly Payment Formula:
                 monthlyPayment = carPrice - downPayment 
                 * 
-                (interest per month (1 + interest per month) * months 
+                (interest per month [(1 + interest per month) * months]
                 / 
                 (1 + interest per month) ^ months - 1
            */
@@ -81,10 +81,11 @@
             let loanDuration = parseFloat((loanYears * 12) + loanMonths);           
             let intRatePerMonth = (interestRate / 100) / 12;
             let monthlyPayment = ((intRatePerMonth + (intRatePerMonth / (Math.pow((1 + intRatePerMonth), loanDuration) -1))) * (carPrice - (downPayment || 0))).toFixed(2);
+            let totalinterestPaid = 2;
 
             
            monthlyOutput.value = monthlyPayment;
-           interestOutput.value = intRatePerMonth;
+           interestOutput.value = totalinterestPaid;
 
         }
     </script>
