@@ -5,26 +5,29 @@ import './styles/main.scss';
 document.getElementById('inputForm').addEventListener('input', function(){setVariables()});
 document.getElementById('btnCalculate').addEventListener('click', function(){generateSchedule()});
 
-//vars
+//Variables
+const form = document.getElementById("inputForm");
+const monthlyOutput = document.getElementById("monthlyOutput");
+const interestOutput = document.getElementById("interestOutput");
+
 function setVariables() {
-    const form = document.getElementById("inputForm");
-        let carPrice = parseInt(form.elements["carPrice"].value);
-        let downPayment = parseInt(form.elements["downPayment"].value);
-        let loanYears = parseInt(form.elements["years"].value);
-        let loanMonths = parseInt(form.elements["months"].value);
-        let interestRate = parseInt(form.elements["interestRate"].value);
-
-        const monthlyOutput = document.getElementById("monthlyOutput");
-        const interestOutput = document.getElementById("interestOutput");
-
-        updateOutput();
+    let formData = {
+        carPrice: parseInt(form.elements["carPrice"].value),
+        downPayment: parseInt(form.elements["downPayment"].value),
+        loanYears: parseInt(form.elements["years"].value),
+        loanMonths: parseInt(form.elements["months"].value),
+        interestRate: parseInt(form.elements["interestRate"].value),
+        monthlyPayment: 0,
+        loanDuration: 0,
+        intRatePerMonth: 0,
+        totalinterestPaid: 0
+    }
+    updateOutput(formData);
+    return formData;
 }
 
 //Form 
-function updateOutput() {
-
-    //Get HTML Elements
-    
+function updateOutput(formData) {
 
     //Calculate
     /* Monthly Payment Formula:
@@ -34,28 +37,29 @@ function updateOutput() {
     */
 
     //Convert years to months to perform all future calculations based on months
-    let loanDuration = parseFloat((loanYears * 12) + loanMonths);     
+    formData.loanDuration = (formData.loanYears * 12) + formData.loanMonths;     
     
     //Calculate Monthly Payment
-    let intRatePerMonth = (interestRate / 1200);
-    let monthlyPayment = ((intRatePerMonth + (intRatePerMonth / (Math.pow((1 + intRatePerMonth), loanDuration) -1))) * (carPrice - (downPayment || 0))).toFixed(2);
+    formData.intRatePerMonth = (formData.interestRate / 1200);
+    formData.monthlyPayment = ((formData.intRatePerMonth + (formData.intRatePerMonth / (Math.pow((1 + formData.intRatePerMonth), formData.loanDuration) -1))) * (formData.carPrice - (formData.downPayment || 0))).toFixed(2);
     
     //Calculate Total Interest Paid
-    
     /* Total Interest Paid Formula
         interest = (interest rate/number of payments) * loan principal
     */
-   let totalinterestPaid = (interestRate / 1200) * (carPrice - downPayment);
+    formData.totalinterestPaid = (formData.interestRate / 1200) * (formData.carPrice - formData.downPayment);
 
    //Output to UI
-    monthlyOutput.value = monthlyPayment;
-    interestOutput.value = totalinterestPaid;
+    monthlyOutput.value = formData.monthlyPayment;
+    interestOutput.value = formData.totalinterestPaid;
 }
 
 
 // Amortization schedule
 function generateSchedule() {
-    if (monthlyOutput = 0) {
+    let formData = setVariables();
+    
+    if (formData.monthlyOutput = 0) {
         alert('Please complete the form first!');
 
     } else {
