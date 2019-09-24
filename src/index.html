@@ -14,34 +14,38 @@
         </header>
         <main class="pageMain">
             <section class="userInput">
-                <form class="userInputForm">
-                    <p><label>Car Price
-                        <input name="carPrice" id="carPrice" type="number" value="0.00" />
+                <form class="userInputForm" id="inputForm" oninput="updateOutput()">
+                    <p><label>Car Price:
+                        <span class="dollarSign">$</span><input name="carPrice" id="carPrice" type="number" value="0.00" onchange="updateOutput()" />
                     </label></p>
-                    <p><label>Downpayment
-                        <input name="downPayment" id="downPayment" type="number" value="0.00" />
+                    <p><label>Downpayment:
+                        <span class="dollarSign">$</span><input name="downPayment" id="downPayment" type="number" value="0.00" onchange="updateOutput()" />
                     </label></p>
-                    <p><label class="loanDuration">Loan Duration
-                            <input name="years" id="years" type="number" value="12" />
-                            <input name="months" id="months" type="number" value="6" />
+                    <p><label class="loanDuration">Loan Duration:
+                        <span class="yearsLabel">years</span><input name="years" id="years" type="number" value="12" onchange="updateOutput()" />
+                        <span class="monthsLabel">months</span><input name="months" id="months" type="number" value="6" onchange="updateOutput()" />
                     </label></p>
-                    <p><label>Interest Rate
-                            <input name="interestRate" id="interestRate" type="number" value="3" />
+                    <p><label>Interest Rate:
+                            <input name="interestRate" id="interestRate" type="number" value="3" onchange="updateOutput()" /><span class="percentSign">%</span>
                         </label></p>
-                    <p><button id="btnCalculate">Calculate</button></p>
-
                 </form>
-                
+
             </section>
             <section class="calculations">
                 <section class="loanAmounts">
                     <h2>Monthly Payment</h2>
-                    <h3 class="outputNums" id="monthlyPayment">XX.XX</h3>
+                    <h3 class="outputNums" id="monthlyPayment">
+                        <output name="MonthlyPayment" id="monthlyOutput" for="carPrice downPayment years months interestRate" form="inputForm">0</output>
+                    </h3>
+
                     <h2>Total Interest Paid</h2>
-                    <h3 class="outputNums" id="totalInterestPaid">XX.XX</h3>
+                    <h3 class="outputNums" id="totalInterestPaid">
+                        <output name="totalInterest" id="interestOutput" for="carPrice downPayment years months interestRate" form="inputForm">0</output>
+                    </h3>
+                    <button id="btnCalculate">Get Amortization Schedule!</button>
                 </section>
                 <section class="amortization">
-                    
+                          
                 </section>
                 
             </section>
@@ -50,6 +54,24 @@
             <p>© 2019 by Risa Hall Web Design, Inc. All Rights Reserved. Car Driving Vector by <a href="https://www.vecteezy.com/free-vector/car-driving">Vecteezy</a>.</p>
         </footer>
     </div>
+    <script>
+        function updateOutput() {
+           //Get HTML Elements
+           const form = document.getElementById("inputForm");
+                let carPrice = parseInt(form.elements["carPrice"].value);
+                let downPayment = parseInt(form.elements["downPayment"].value);
+                let loanYears = parseInt(form.elements["years"].value);
+                let loanMonths = parseInt(form.elements["months"].value);
+                let interestRate = parseInt(form.elements["interestRate"].value);
 
-<script type="text/javascript" src="main.js"></script></body>
+           const monthlyOutput = document.getElementById("monthlyOutput");
+           const interestOutput = document.getElementById("interestOutput");
+
+           //Calculate
+           monthlyOutput.value = carPrice;
+           interestOutput.value = downPayment;
+
+        }
+    </script>
+    </body>
 </html>

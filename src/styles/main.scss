@@ -76,7 +76,19 @@
             h3 {
                 color: $salmon;
                 font-size: 5rem;
-          }
+            }
+            button {
+                font-family: $font-family-body;
+                font-size: 1.5rem;
+                padding: 1rem;
+                border-radius: 0.5em;
+                background: $purple;
+                color: $white;
+                border: none;
+                right: 0px;
+                margin: .75rem auto;
+                width: 100%;
+            }
         }
         .userInput {
               .userInputForm{
@@ -92,23 +104,17 @@
                 input, select, textarea {
                     font-size: 1.5rem;
                     color: $gray;
-                    margin: auto .5rem;
+                    margin-top: .75rem;
                     padding:.5rem;
                     border: none;
                     background-color: $grayTransBox;
                 }
-                button {
-                    font-family: $font-family-body;
-                    font-size: 1.5rem;
-                    padding: 1rem;
-                    border-radius: 0.5em;
-                    background: $purple;
-                    color: $white;
-                    border: none;
-                    right: 0px;
-                    margin: .5rem auto;
-                    width: 100%;
+                .percentSign, .dollarSign, .monthsLabel, .yearsLabel {
+                    font-size: 1.25rem;
+                    color: $lightblue;
+                    margin: auto .5rem;
                 }
+                
                 button:hover {
                     background: #ccc;
                     cursor: pointer;
@@ -116,6 +122,9 @@
                 .loanDuration input {
                     width: 4rem;
 
+                }
+                #interestRate {
+                    width: 4rem;
                 }
         
             }      
