@@ -59,7 +59,7 @@ function updateOutput() {
 // Amortization schedule
 function generateSchedule() {
     let formData = updateOutput();
-    if (formData.calcMonthlyPayment() === "0.00") {
+    if (formData.calcMonthlyPayment() === 0) {
         alert('Please complete the form first!');
     } else {
         
