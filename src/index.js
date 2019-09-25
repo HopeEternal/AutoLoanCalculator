@@ -40,7 +40,9 @@ function updateOutput() {
     for ( let i = 0; i < formData.calcLoanDuration(); i++ ) {
 
         balance = balance - formData.calcMonthlyPayment() + interest;
-        
+        if ((1 / balance) < 0) {
+            balance = 0;
+        }
         formData.rowContent[i] = [ i+1, formData.calcMonthlyPayment().toFixed(2), (formData.calcMonthlyPayment() - interest).toFixed(2), (interest).toFixed(2), totalInterestPaid.toFixed(2), balance.toFixed(2) ];
 
         interest = parseFloat(formData.intRatePerMonth() * balance);
@@ -59,7 +61,6 @@ function generateSchedule() {
     let formData = updateOutput();
     if (formData.calcMonthlyPayment() === "0.00") {
         alert('Please complete the form first!');
-
     } else {
         
         //Generate Table
