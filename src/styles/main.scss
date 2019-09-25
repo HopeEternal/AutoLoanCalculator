@@ -12,7 +12,7 @@
     $darkblue: #1F6187;
     $grayblue: #626796;
     $purple: #8864AA;
-    $gray: #99AABB;
+    $gray: #b3bfcc;
     $salmon: #FACE93;
     $grayTransBox: rgba(56, 61, 67, .4);
     // Typography
@@ -84,12 +84,19 @@
                     font-size: 1.5rem;
                     padding: 1rem;
                     border-radius: 0.5em;
-                    background: $purple;
+                    background: $grayblue;
                     color: $white;
                     border: none;
                     right: 0px;
                     margin: .75rem auto;
                     width: 100%;
+                }
+                button:hover {
+                    background: $purple;
+                    cursor: pointer;
+                }
+                button:focus {
+                    outline: none;
                 }
             }
             .userInput {
@@ -116,11 +123,6 @@
                         color: $lightblue;
                         margin: auto .5rem;
                     }
-                    
-                    button:hover {
-                        background: #ccc;
-                        cursor: pointer;
-                    }
                     .loanDuration input {
                         width: 4rem;
 
@@ -137,6 +139,31 @@
         .amortization{
             padding: 3rem;
             flex: 1;
+            display: flex;
+            justify-content: center;
+            table {
+                background: $white;
+                color: $darkgray;
+                font-size: 1.5rem;
+                border: none;
+                border-collapse: collapse;
+                box-shadow: 0.5rem 0.75rem 0.5rem 0.02rem $darkgray;
+                th {
+                    font-weight: bold;
+                    background: $grayblue;
+                    color: $white;
+                }
+                tr {
+                    border-bottom: 1px solid $gray;
+                }
+                tr:nth-child(even) {
+                    background: $lightblue;
+                }
+                td, th {
+                    border: none;
+                    padding: 1rem;
+                }
+            }
         }
     }
     
