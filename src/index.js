@@ -126,3 +126,5 @@ function inputValidation() {
         }
     }
 }
+
+inputValidation();
