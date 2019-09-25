@@ -1,103 +1,128 @@
-//imports
 import './styles/main.scss';
 
-//Event Listeners
-document.getElementById('inputForm').addEventListener('input', function(){updateOutput()});
-document.getElementById('btnCalculate').addEventListener('click', function(){generateSchedule()});
+document.getElementById('inputForm').addEventListener('input', function(){inputValidation();updateOutput();});
+document.getElementById('btnCalculate').addEventListener('click', function(){
+    (monthlyOutput.value>0)?generateSchedule():alert('Please complete the form first!');
+});
 
-//Variables
 const form = document.getElementById("inputForm");
 const monthlyOutput = document.getElementById("monthlyOutput");
 const interestOutput = document.getElementById("interestOutput");
 
 function updateOutput() {
-    let formData = {
-        carPrice: parseFloat(form.elements["carPrice"].value),
-        downPayment: parseFloat(form.elements["downPayment"].value),
-        loanYears: parseFloat(form.elements["years"].value),
-        loanMonths: parseFloat(form.elements["months"].value),
-        interestRate: parseFloat(form.elements["interestRate"].value),
-        calcMonthlyPayment: function () {
-            return (this.intRatePerMonth() + (this.intRatePerMonth() / (Math.pow((1 + this.intRatePerMonth()), this.calcLoanDuration()) - 1))) * (this.carPrice - (this.downPayment || 0));
-        },
-        calcLoanDuration: function () {
-            return parseFloat((this.loanYears * 12) + this.loanMonths);
-        },
-        intRatePerMonth: function () {
-            return parseFloat(this.interestRate / 1200);
-        },
-        initialInterestPaid: function () {
-            return parseFloat((this.interestRate / 1200) * (this.carPrice - this.downPayment));
-        },
-        rowContent: []
-    }
+
+    let carPrice = parseFloat(form.elements["carPrice"].value);
+    let downPayment = parseFloat(form.elements["downPayment"].value);
+    let loanYears = parseFloat(form.elements["years"].value);
+    let loanMonths = parseFloat(form.elements["months"].value);
+    let interestRate = parseFloat(form.elements["interestRate"].value);
+
+    // Amortization table content
+    let rowContent = [];
+    
+    // Calculations for monthly payment
+    let loanDuration = (loanYears * 12) + loanMonths;
+    let intRatePerMonth = interestRate / 1200;
+    let initialInterestPaid = (interestRate / 1200) * (carPrice - downPayment);
+
+    let monthlyPayment = (intRatePerMonth + (intRatePerMonth / (Math.pow((1 + intRatePerMonth), loanDuration) - 1))) * (carPrice - downPayment);
 
     // Calculations for amortization table
-    let balance = parseFloat(formData.carPrice - formData.downPayment);
-    let totalInterestPaid = parseFloat(formData.initialInterestPaid());
-    let interest = parseFloat(formData.initialInterestPaid());
+    let balance = carPrice - downPayment;
+    let totalInterestPaid = initialInterestPaid;
+    let interest = initialInterestPaid;
 
-    for ( let i = 0; i < formData.calcLoanDuration(); i++ ) {
+    for ( let i = 0; i < loanDuration; i++ ) {
 
-        balance = balance - formData.calcMonthlyPayment() + interest;
-        if ((1 / balance) < 0) {
+        balance = balance - monthlyPayment + interest;
+        if (balance < 0) {
             balance = 0;
         }
-        formData.rowContent[i] = [ i+1, formData.calcMonthlyPayment().toFixed(2), (formData.calcMonthlyPayment() - interest).toFixed(2), (interest).toFixed(2), totalInterestPaid.toFixed(2), balance.toFixed(2) ];
+        rowContent[i] = [ i+1, "$"+monthlyPayment.toFixed(2), "$"+(monthlyPayment - interest).toFixed(2), "$"+(interest).toFixed(2), "$"+totalInterestPaid.toFixed(2), "$"+balance.toFixed(2) ];
 
-        interest = parseFloat(formData.intRatePerMonth() * balance);
+        interest = intRatePerMonth * balance;
         totalInterestPaid += interest;
     }
 
-    //Output to UI
-    monthlyOutput.value = formData.calcMonthlyPayment().toFixed(2);
-    interestOutput.value = totalInterestPaid.toFixed(2);
+    // Output to UI
+    if ( monthlyPayment >= 0 && isFinite(monthlyPayment) ) {
+        monthlyOutput.value = monthlyPayment.toFixed(2);
+        interestOutput.value = totalInterestPaid.toFixed(2);
+    }
 
-    return formData;
+    return rowContent; // pass table content to generateSchedule()
 }
 
 // Amortization schedule
 function generateSchedule() {
-    let formData = updateOutput();
-    if (formData.calcMonthlyPayment() === 0) {
-        alert('Please complete the form first!');
-    } else {
         
-        //Generate Table
-        let tableLocation = document.getElementsByClassName("amortization")[0];
+    //Generate Table
+    let tableLocation = document.getElementsByClassName("amortization")[0];
 
-        let table = document.createElement("table");
-        let tableBody = document.createElement("tbody");
+    let table = document.createElement("table");
+    let tableBody = document.createElement("tbody");
 
-        // Add titles for each column
-        let columnTitle = document.createElement("tr");
-        let titles= ["Payment #", "Payment Amount", "Principal Paid","Interest Paid","Total Interest","Balance"];
+    // Add titles for each column
+    let columnTitle = document.createElement("tr");
+    let titles= ["Payment #", "Payment Amount", "Principal Paid","Interest Paid","Total Interest","Balance"];
+    for ( let j = 0; j < 6; j++ ) {
+        let tableHeaders = document.createElement("th");
+    
+        let title = document.createTextNode(titles[j]);
+        tableHeaders.appendChild(title);
+        columnTitle.appendChild(tableHeaders);
+    }
+    table.appendChild(columnTitle);
+
+    let duration = parseInt(form.elements["years"].value) * 12 + parseInt(form.elements["months"].value);
+    let rowContent = updateOutput();
+    
+    // Generate table body
+    for ( let i = 0; i < duration; i++ ) {
+        let row = document.createElement("tr");
+
         for ( let j = 0; j < 6; j++ ) {
-            let tableHeaders = document.createElement("th");
-        
-            let title = document.createTextNode(titles[j]);
-            tableHeaders.appendChild(title);
-            columnTitle.appendChild(tableHeaders);
+            let cell = document.createElement("td");
+            let cellContent = document.createTextNode(rowContent[i][j]);
+            cell.appendChild(cellContent);
+            row.appendChild(cell);
         }
-        table.appendChild(columnTitle);
 
-        // Generate table body
-        for ( let i = 0; i < formData.calcLoanDuration(); i++ ) {
-            let row = document.createElement("tr");
+        tableBody.appendChild(row);
+    }
 
-            for ( let j = 0; j < 6; j++ ) {
-                let cell = document.createElement("td");
-                let cellContent = document.createTextNode(formData.rowContent[i][j]);
-                cell.appendChild(cellContent);
-                row.appendChild(cell);
+    table.appendChild(tableBody);
+    tableLocation.innerHTML = ""; // Clear any previous table
+    tableLocation.appendChild(table);
+    table.setAttribute("border", "2");
+}
+
+// Check if all inputs are valid
+function inputValidation() {
+
+    let moneyInput = document.getElementsByClassName("moneyInput");
+    let dateInput = document.getElementsByClassName("dateInput");
+
+    for ( let i = 0; i < moneyInput.length; i++ ) {
+        moneyInput[i].onkeydown = function(e) {
+            if(!((e.keyCode > 95 && e.keyCode < 106)
+            || (e.keyCode > 47 && e.keyCode < 58) 
+            || e.keyCode == 8 
+            || e.keyCode == 9
+            || e.keyCode == 190)) {
+                return false;
             }
-
-            tableBody.appendChild(row);
         }
+    }
 
-        table.appendChild(tableBody);
-        tableLocation.innerHTML = "";
-        tableLocation.appendChild(table);
-        table.setAttribute("border", "2");
+    for ( let i = 0; i < dateInput.length; i++ ) {
+        dateInput[i].onkeydown = function(e) {
+            if(!((e.keyCode > 95 && e.keyCode < 106)
+            || (e.keyCode > 47 && e.keyCode < 58) 
+            || e.keyCode == 8 
+            || e.keyCode == 9)) {
+                return false;
+            }
+        }
     }
 }
