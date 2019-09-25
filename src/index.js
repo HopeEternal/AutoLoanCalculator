@@ -1,8 +1,16 @@
 import './styles/main.scss';
 
+// Calculates monthly payment and amortization table after each input
 document.getElementById('inputForm').addEventListener('input', function(){inputValidation();updateOutput();});
+
+// Generate amortization table from button click
 document.getElementById('btnCalculate').addEventListener('click', function(){
     (monthlyOutput.value>0)?generateSchedule():alert('Please complete the form first!');
+});
+
+// Check for empty fields and change them to zero
+Array.from(document.getElementsByClassName('input')).forEach(function(element) {
+    element.addEventListener('blur', function(){emptyField()});
 });
 
 const form = document.getElementById("inputForm");
@@ -113,6 +121,7 @@ function inputValidation() {
                 return false;
             }
         }
+        
     }
 
     for ( let i = 0; i < dateInput.length; i++ ) {
@@ -125,6 +134,21 @@ function inputValidation() {
             }
         }
     }
+}
+
+// Check for empty fields and change them to zero
+function emptyField() {
+    let input = document.getElementsByClassName("input");
+    let interestRate = document.getElementById("interestRate");
+
+    for ( let i = 0; i < input.length; i++ ) {
+        
+        if (input[i].value.length == 0)  {
+            input[i].value = 0;
+        }
+    }
+
+    if ( interestRate.value <= 0 ) interestRate.value = 1.0;
 }
 
 inputValidation();
