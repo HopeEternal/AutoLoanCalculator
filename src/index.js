@@ -58,21 +58,11 @@ function updateOutput(formData) {
 // Amortization schedule
 function generateSchedule() {
     let formData = setVariables();
-    
-    if (formData.monthlyOutput = 0) {
+    if (formData.monthlyPayment === "0.00") {
         alert('Please complete the form first!');
 
     } else {
-        const form = document.getElementById("inputForm");
-        let carPrice = parseInt(form.elements["carPrice"].value);
-        let downPayment = parseInt(form.elements["downPayment"].value);
-        let loanYears = parseInt(form.elements["years"].value);
-        let loanMonths = parseInt(form.elements["months"].value);
-        let interestRate = parseInt(form.elements["interestRate"].value);
-
-        let loanDuration = parseFloat((loanYears * 12) + loanMonths);           
-        let intRatePerMonth = (interestRate / 100) / 12;
-
+        //Generate Table
         let tableLocation = document.getElementsByClassName("amortization")[0];
 
         let table = document.createElement("table");
@@ -90,15 +80,15 @@ function generateSchedule() {
         }
         table.appendChild(columnTitle);
 
-
+        // Calculations
 
         // Generate table body
-        for ( let i = 0; i < loanDuration; i++ ) {
+        for ( let i = 0; i < formData.loanDuration; i++ ) {
             let row = document.createElement("tr");
             
             for ( let j = 0; j < 6; j++ ) {
                 let cell = document.createElement("td");
-                let cellContent = document.createTextNode("content");
+                let cellContent = document.createTextNode(formData.monthlyPayment);
                 cell.appendChild(cellContent);
                 row.appendChild(cell);
             }
